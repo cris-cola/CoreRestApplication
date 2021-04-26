@@ -1,44 +1,47 @@
+using System;
 using System.Collections.Generic;
 using CoreRestApplication.Controllers;
 using CoreRestApplication.Data;
 using CoreRestApplication.Model;
 using Microsoft.AspNetCore.Mvc;
-using NUnit.Framework;
+using Moq;
+using NSubstitute;
 using Rhino.Mocks;
+using Xunit;
 
-namespace CoreRestApplication.Test
+namespace CoreRestApplication.UnitTest
 {
     public class CustomersControllerTest
     {
-        private ICustomerRepository customerRepository;
-        private ICustomerFactory customerFactory;
+        private readonly Mock<ICustomerRepository> customerRepository;
+        private readonly Mock<ICustomerFactory> customerFactory;
 
         private CustomersController Sut;
 
-        [SetUp]
-        public void Setup()
+        public CustomersControllerTest()
         {
-            customerRepository = MockRepository.GenerateMock<ICustomerRepository>();
-            customerFactory = MockRepository.GenerateMock<ICustomerFactory>();
+            customerRepository = new Mock<ICustomerRepository>();
+            customerFactory = new Mock<ICustomerFactory>();
             
-            Sut = new CustomersController(customerRepository, customerFactory);
+            Sut = new CustomersController(customerRepository.Object, customerFactory.Object);
         }
 
-        [Test]
+        [Fact]
         public void ShouldGetCustomersWhenPresent()
         {
-            customerRepository.Stub(x => x.GetCustomers())
-                .Return(MockRepositoryResponse());
-
+            customerRepository.Setup(p => p.GetCustomers())
+                .Returns(MockRepositoryResponse());
+            
             IActionResult result = Sut.GetAllCustomers();
             var okResult = result as OkObjectResult;
+            
             // assert
-            Assert.IsNotNull(okResult);
-            Assert.AreEqual(200, okResult.StatusCode);
+            Assert.NotNull(okResult);
+            Assert.Equal(200, okResult.StatusCode);
         }
 
         #region Privates
-        
+
         private static List<CustomerModel> MockRepositoryResponse()
         {
             return new List<CustomerModel>
