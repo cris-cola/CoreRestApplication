@@ -1,2 +1,2 @@
 # CoreRestApplication
-A web API created with ASP.NET Core 3.1
+A REST API created with ASP.NET Core 3.1
