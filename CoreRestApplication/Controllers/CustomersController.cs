@@ -84,9 +84,9 @@ namespace CoreRestApplication.Controllers
                 CustomerFactory.Register(customerToUpdate);
                 var customerModel = CustomerFactory.Invoke();
                 
-                var newRedBetCustomer = CustomerRepository.UpdateCustomerData(customerModel);
-                if (newRedBetCustomer == null)
-                    return NotFound("User not found. Try Again");
+                var updatedCustomer = CustomerRepository.UpdateCustomerData(customerModel);
+                if (updatedCustomer == null)
+                    return NotFound("User not found");
 
                 return NoContent();
             }
