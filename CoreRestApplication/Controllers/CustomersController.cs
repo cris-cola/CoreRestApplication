@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using CoreRestApplication.Data;
 using CoreRestApplication.Model;
@@ -26,7 +27,7 @@ namespace CoreRestApplication.Controllers
         {
             try
             {
-                var customers = CustomerRepository.GetCustomers();
+                IEnumerable<CustomerModel> customers = CustomerRepository.GetCustomers();
                 if (customers.Any())
                     return Ok(customers);
 
@@ -56,7 +57,7 @@ namespace CoreRestApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ICustomerModel> Post(CustomerDto newCustomer)
+        public ActionResult<CustomerModel> Post(CustomerDto newCustomer)
         {
             try
             {
@@ -76,7 +77,7 @@ namespace CoreRestApplication.Controllers
         }
         
         [HttpPut]
-        public ActionResult<ICustomerModel> Put(CustomerDto customerToUpdate)
+        public ActionResult<CustomerModel> Put(CustomerDto customerToUpdate)
         {
             try
             {
@@ -96,7 +97,7 @@ namespace CoreRestApplication.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<ICustomerModel> Delete(int id)
+        public ActionResult<CustomerModel> Delete(int id)
         {
             try
             {

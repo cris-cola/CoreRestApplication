@@ -9,7 +9,7 @@ namespace CoreRestApplication.Data
     {
         private string CustomerType;
         private readonly IMapper Mapper;
-        private Dictionary<string, Func<ICustomerModel>> Customers;
+        private Dictionary<string, Func<CustomerModel>> Customers;
         
         public CustomerFactory(IMapper mapper)
         {
@@ -19,14 +19,14 @@ namespace CoreRestApplication.Data
         public void Register(CustomerDto newCustomer)
         {
             CustomerType = newCustomer.CustomerType;
-            Customers = new Dictionary<string, Func<ICustomerModel>>
+            Customers = new Dictionary<string, Func<CustomerModel>>
             {
                 ["RedBet"] = () => MapCustomer<RedBetCustomerModel>(newCustomer),
                 ["MrGreen"] = () => MapCustomer<MrGreenCustomerModel>(newCustomer)
             };
         }
 
-        public ICustomerModel Invoke()
+        public CustomerModel Invoke()
         {
             return Customers[CustomerType].Invoke();
         }
@@ -39,7 +39,7 @@ namespace CoreRestApplication.Data
     
     public interface ICustomerFactory
     {
-        ICustomerModel Invoke();
+        CustomerModel Invoke();
         void Register(CustomerDto newCustomer);
     }
 }

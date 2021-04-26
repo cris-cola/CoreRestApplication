@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using CoreRestApplication.Controllers;
 using CoreRestApplication.Data;
+using CoreRestApplication.Model;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -24,6 +26,9 @@ namespace CoreRestApplication.Test
         [Test]
         public void ShouldPassTest()
         {
+            customerRepository.Stub(x => x.GetCustomers())
+                .Return(new List<CustomerModel>{new MrGreenCustomerModel(), new RedBetCustomerModel()});
+            
             Assert.Pass();
         }
     }

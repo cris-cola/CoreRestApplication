@@ -28,6 +28,10 @@ namespace CoreRestApplication.Data
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (Id == 0)
+            {
+                yield return new ValidationResult($"{nameof(Id)} field is mandatory and must be greater than 0", new[] { nameof(Id) });
+            }
             if (string.IsNullOrEmpty(CustomerType))
             {
                 yield return new ValidationResult($"{nameof(CustomerType)} field must be provided. Accepted values: 'RedBet', 'MrGreen'", new[] { nameof(CustomerType) });
@@ -52,26 +56,5 @@ namespace CoreRestApplication.Data
     {
         public const string RedBet = "RedBet";
         public const string MrGreen = "MrGreen";
-    }
-
-    public class AddressDto
-    {
-        public AddressDto()
-        {
-            
-        }
-        public AddressDto(string streetName, string streetNumber, string zipCode)
-        {
-            StreetName = streetName;
-            StreetNumber = streetNumber;
-            ZipCode = zipCode;
-        }
-       
-        [Required]
-        public string StreetName { get; set; }
-        [Required]
-        public string StreetNumber { get; set; }
-        [Required]
-        public string ZipCode { get; set; }
     }
 }
