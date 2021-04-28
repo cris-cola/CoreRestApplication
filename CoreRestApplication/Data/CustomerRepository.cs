@@ -12,8 +12,8 @@ namespace CoreRestApplication.Data
         {
             Customers = new List<CustomerModel>
             {
-                new MrGreenCustomerModel(1, "Winston", "Churchill", new AddressModel("Downey St.", "222", "60766"), "(222) 555-1212"){CustomerType = "MrGreen"},
-                new RedBetCustomerModel(3, "Bon", "Jovi", new AddressModel("1234 St. Francisco", "122", "12345"), "Barcelona"){CustomerType = "RedBet"}
+                new MrGreenCustomerModel(1, "Winston", "Churchill", new AddressModel("Downey St.", "222", "60766"), "(222) 555-1212"){ CustomerType = "MrGreen" },
+                new RedBetCustomerModel(3, "Bon", "Jovi", new AddressModel("1234 St. Francisco", "122", "12345"), "Barcelona"){ CustomerType = "RedBet" }
             };
         }
 

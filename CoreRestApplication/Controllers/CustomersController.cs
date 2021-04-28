@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CoreRestApplication.Data;
 using CoreRestApplication.Model;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +24,7 @@ namespace CoreRestApplication.Controllers
         }
         
         [HttpGet]
-        public IActionResult GetAllCustomers()
+        public async Task<IActionResult> GetAllCustomers()
         {
             try
             {
@@ -40,7 +41,7 @@ namespace CoreRestApplication.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetCustomer(int id)
+        public async Task<IActionResult> GetCustomer(int id)
         {
             try
             {
@@ -57,7 +58,7 @@ namespace CoreRestApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CustomerModel> Post(CustomerDto newCustomer)
+        public async Task<ActionResult<CustomerModel>> Post(CustomerDto newCustomer)
         {
             try
             {
@@ -77,7 +78,7 @@ namespace CoreRestApplication.Controllers
         }
         
         [HttpPut]
-        public ActionResult<CustomerModel> Put(CustomerDto customerToUpdate)
+        public async Task<ActionResult<CustomerModel>> Put(CustomerDto customerToUpdate)
         {
             try
             {
@@ -97,7 +98,7 @@ namespace CoreRestApplication.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<CustomerModel> Delete(int id)
+        public async Task<ActionResult<CustomerModel>> Delete(int id)
         {
             try
             {
