@@ -1,5 +1,7 @@
 using System.Reflection;
-using CoreRestApplication.Data;
+using CoreRestApplication.Core;
+using CoreRestApplication.Core.Data;
+using CoreRestApplication.Core.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,8 +27,8 @@ namespace CoreRestApplication
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
-            services.AddSingleton<ICustomerFactory, CustomerFactory>();
 
+            services.AddControllers(o => o.ModelBinderProviders.Insert(0, new CustomerModelBinderProvider()));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

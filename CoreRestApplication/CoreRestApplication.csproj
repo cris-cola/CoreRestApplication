@@ -12,5 +12,9 @@
     <PackageReference Include="RhinoMocks" Version="3.6.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CoreRestApplication.Core\CoreRestApplication.Core.csproj" />
+  </ItemGroup>
+
 
 </Project>
