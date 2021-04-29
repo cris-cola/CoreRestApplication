@@ -1,4 +1,6 @@
-﻿namespace CoreRestApplication.Core.Data.Model
+﻿using CoreRestApplication.Core.Data.Dto;
+
+namespace CoreRestApplication.Core.Data.Model
 {
     public class CustomerModel
     {

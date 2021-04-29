@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CoreRestApplication.Core.Data
+namespace CoreRestApplication.Core.Data.Dto
 {
     public class AddressDto
     {

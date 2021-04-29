@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreRestApplication.Core;
 using CoreRestApplication.Core.Data;
+using CoreRestApplication.Core.Data.Dto;
+using CoreRestApplication.Core.Data.Interfaces;
 using CoreRestApplication.Core.Data.Model;
-using CoreRestApplication.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace CoreRestApplication.Controllers

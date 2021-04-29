@@ -1,7 +1,7 @@
 using System.Reflection;
 using CoreRestApplication.Core;
 using CoreRestApplication.Core.Data;
-using CoreRestApplication.Core.Interfaces;
+using CoreRestApplication.Core.Data.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

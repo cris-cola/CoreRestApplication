@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using CoreRestApplication.Core.Data;
+using CoreRestApplication.Core.Data.Dto;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
 namespace CoreRestApplication.Core
 {
-
     public class ModelBinderProvider : IModelBinderProvider
     {
         public IModelBinder GetBinder(ModelBinderProviderContext context)

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using CoreRestApplication.Core.Data;
+using CoreRestApplication.Core.Data.Dto;
 
-namespace CoreRestApplication.Core.Interfaces
+namespace CoreRestApplication.Core.Data.Interfaces
 {
     public interface ICustomerRepository
     {
