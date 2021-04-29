@@ -10,3 +10,8 @@
 
 *.cache
 *assets.json
+/CoreRestApplication.Tests/bin/*
+/CoreRestApplication.Tests/obj/*
+/CoreRestApplication.Core/obj/*
+/CoreRestApplication/obj/*
+/CoreRestApplication.Core/obj/*
