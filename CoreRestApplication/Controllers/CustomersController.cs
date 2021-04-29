@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CoreRestApplication.Data;
-using CoreRestApplication.Model;
+using System.Threading.Tasks;
+using CoreRestApplication.Core;
+using CoreRestApplication.Core.Data;
+using CoreRestApplication.Core.Data.Model;
+using CoreRestApplication.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace CoreRestApplication.Controllers
@@ -14,20 +17,18 @@ namespace CoreRestApplication.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ICustomerRepository CustomerRepository;
-        private readonly ICustomerFactory CustomerFactory;
         
-        public CustomersController(ICustomerRepository customerRepository, ICustomerFactory customerFactory)
+        public CustomersController(ICustomerRepository customerRepository)
         {
-            CustomerFactory = customerFactory;
             CustomerRepository = customerRepository;
         }
         
         [HttpGet]
-        public IActionResult GetAllCustomers()
+        public async Task<IActionResult> GetAllCustomers()
         {
             try
             {
-                IEnumerable<CustomerModel> customers = CustomerRepository.GetCustomers();
+                var customers = CustomerRepository.GetCustomers();
                 if (customers.Any())
                     return Ok(customers);
 
@@ -40,7 +41,7 @@ namespace CoreRestApplication.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetCustomer(int id)
+        public async Task<IActionResult> GetCustomer(int id)
         {
             try
             {
@@ -57,37 +58,30 @@ namespace CoreRestApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CustomerModel> Post(CustomerDto newCustomer)
+        public async Task<ActionResult<CustomerModel>> Post([ModelBinder(BinderType = typeof(CustomerModelBinder))] CustomerDto newCustomer)
         {
             try
             {
-                CustomerFactory.Register(newCustomer);
-                var customerModel = CustomerFactory.Invoke();
-                
-                var registeredCustomer = CustomerRepository.RegisterNewCustomer(customerModel);
+                var registeredCustomer = CustomerRepository.RegisterNewCustomer(newCustomer);
                 if (registeredCustomer == null)
                     return Conflict("Id already associated with a registered user");
 
                 return Created($"api/Customers/{registeredCustomer.Id}", registeredCustomer);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something went wrong");
             }
         }
         
         [HttpPut]
-        public ActionResult<CustomerModel> Put(CustomerDto customerToUpdate)
+        public async Task<ActionResult<CustomerModel>> Put([ModelBinder(BinderType = typeof(CustomerModelBinder))] CustomerDto customerDto)
         {
             try
             {
-                CustomerFactory.Register(customerToUpdate);
-                var customerModel = CustomerFactory.Invoke();
-                
-                var updatedCustomer = CustomerRepository.UpdateCustomerData(customerModel);
+                var updatedCustomer = CustomerRepository.UpdateCustomerData(customerDto);
                 if (updatedCustomer == null)
                     return NotFound("User not found");
-
                 return NoContent();
             }
             catch (Exception)
@@ -97,7 +91,7 @@ namespace CoreRestApplication.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<CustomerModel> Delete(int id)
+        public async Task<ActionResult<CustomerModel>> Delete(int id)
         {
             try
             {
