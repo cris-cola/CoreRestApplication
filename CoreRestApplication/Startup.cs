@@ -28,7 +28,7 @@ namespace CoreRestApplication
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
 
-            services.AddControllers(o => o.ModelBinderProviders.Insert(0, new CustomerModelBinderProvider()));
+            //services.AddControllers(o => o.ModelBinderProviders.Insert(0, new ModelBinderProvider()));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

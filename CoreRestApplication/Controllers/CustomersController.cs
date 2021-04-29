@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreRestApplication.Core;
 using CoreRestApplication.Core.Data;
 using CoreRestApplication.Core.Data.Model;
 using CoreRestApplication.Core.Interfaces;
@@ -27,7 +28,7 @@ namespace CoreRestApplication.Controllers
         {
             try
             {
-                IEnumerable<CustomerDto> customers = CustomerRepository.GetCustomers();
+                var customers = CustomerRepository.GetCustomers();
                 if (customers.Any())
                     return Ok(customers);
 
@@ -57,11 +58,11 @@ namespace CoreRestApplication.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomerModel>> Post(CustomerDto newCustomer)
+        public async Task<ActionResult<CustomerModel>> Post([ModelBinder(BinderType = typeof(CustomerModelBinder))] CustomerDto newCustomer)
         {
             try
             {
-                CustomerDto registeredCustomer = CustomerRepository.RegisterNewCustomer(newCustomer);
+                var registeredCustomer = CustomerRepository.RegisterNewCustomer(newCustomer);
                 if (registeredCustomer == null)
                     return Conflict("Id already associated with a registered user");
 
@@ -74,7 +75,7 @@ namespace CoreRestApplication.Controllers
         }
         
         [HttpPut]
-        public async Task<ActionResult<CustomerModel>> Put(CustomerDto customerDto)
+        public async Task<ActionResult<CustomerModel>> Put([ModelBinder(BinderType = typeof(CustomerModelBinder))] CustomerDto customerDto)
         {
             try
             {
