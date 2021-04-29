@@ -10,7 +10,7 @@ namespace CoreRestApplication.Core
 {
     public class CustomerModelBinder : IModelBinder
     {
-        private Dictionary<string, Func<CustomerDto>> Customers = new Dictionary<string, Func<CustomerDto>>();
+        private Dictionary<string, Func<CustomerDto>> _customers = new Dictionary<string, Func<CustomerDto>>();
         
         public async Task BindModelAsync(ModelBindingContext bindingContext)
         {
@@ -20,7 +20,7 @@ namespace CoreRestApplication.Core
             RegisterAvailableCustomerTypes(bodyAsText);
             
             var customerType = JsonConvert.DeserializeObject<CustomerDto>(bodyAsText).CustomerType;
-            var newCustomer = Customers[customerType].Invoke();
+            var newCustomer = _customers[customerType].Invoke();
             
             bindingContext.Result = ModelBindingResult.Success(newCustomer);
         }
@@ -29,10 +29,10 @@ namespace CoreRestApplication.Core
 
         private void RegisterAvailableCustomerTypes(string bodyAsText)
         {
-            Customers = new Dictionary<string, Func<CustomerDto>>
+            _customers = new Dictionary<string, Func<CustomerDto>>
             {
-                [nameof(RedBet)] = () => Deserialize<RedBet>(bodyAsText),
-                [nameof(MrGreen)] = () => Deserialize<MrGreen>(bodyAsText)
+                [nameof(MrBet)] = () => Deserialize<MrBet>(bodyAsText),
+                [nameof(GreenHat)] = () => Deserialize<GreenHat>(bodyAsText)
             };
         }
 

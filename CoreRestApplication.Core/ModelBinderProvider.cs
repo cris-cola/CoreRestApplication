@@ -17,7 +17,7 @@ namespace CoreRestApplication.Core
                 return null;
             }
 
-            var subclasses = new[] { typeof(MrGreen), typeof(RedBet) };
+            var subclasses = new[] { typeof(GreenHat), typeof(MrBet) };
 
             var binders = new Dictionary<Type, (ModelMetadata, IModelBinder)>();
             foreach (var type in subclasses)
@@ -74,8 +74,8 @@ namespace CoreRestApplication.Core
         {
             return name switch
             {
-                nameof(RedBet) => typeof(RedBet),
-                nameof(MrGreen) => typeof(MrGreen),
+                nameof(MrBet) => typeof(MrBet),
+                nameof(GreenHat) => typeof(GreenHat),
                 _ => null
             };
         }

@@ -1,4 +1,7 @@
-namespace CoreRestApplication.UnitTest
+using System;
+using Xunit;
+
+namespace CoreRestApplication.Tests
 {
     public class CustomersControllerTest
     {

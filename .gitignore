@@ -6,5 +6,7 @@
 /CoreRestApplication.Core/bin/Debug/netcoreapp3.1/*
 /CoreRestApplication.Core/obj/Debug/netcoreapp3.1/*
 /CoreRestApplication/bin/Debug/netcoreapp3.1/*
-/CoreRestApplication/bin/Debug/netcoreapp3.1/*
 /CoreRestApplication/obj/Debug/netcoreapp3.1/*
+
+*.cache
+*assets.json

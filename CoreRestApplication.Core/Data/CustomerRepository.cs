@@ -13,8 +13,8 @@ namespace CoreRestApplication.Core.Data
         {
             _customers = new List<CustomerDto>
             {
-                new RedBet(1, "Winston", "Churchill", new AddressDto("Downey St.", "222", "60766"), "(222) 555-1212"){ CustomerType = "MrGreen" },
-                new MrGreen(3, "Bon", "Jovi", new AddressDto("1234 St. Francisco", "122", "12345"), "Barcelona"){ CustomerType = "RedBet" }
+                new MrBet(1, "Winston", "Churchill", new AddressDto("Downey St.", "222", "60766"), "(222) 555-1212"){ CustomerType = "MrBet" },
+                new GreenHat(3, "Bon", "Jovi", new AddressDto("1234 St. Francisco", "122", "12345"), "Barcelona"){ CustomerType = "GreenHat" }
             };
         }
 
